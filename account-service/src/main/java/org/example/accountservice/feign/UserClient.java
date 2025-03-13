@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "user-service", url = "http://localhost:8081")
 public interface UserClient {
 
-    @GetMapping("/user/getByEmail")
-    UserDto findByEmail(@RequestParam String email);
+    @GetMapping("/user/getByTelegramId")
+    UserDto findByTelegramId(@RequestParam String telegramId);
 
     @GetMapping("/user/getByUsername")
     UserDto findByUsername(@RequestParam String username);

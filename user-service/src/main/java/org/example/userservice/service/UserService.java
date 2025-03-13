@@ -15,28 +15,11 @@ public class UserService {
 
     public void addUser(UserDto userDto) {
         var user = User.builder()
+                .telegramId(userDto.getTelegramId())
                 .username(userDto.getUsername())
-                .email(userDto.getEmail())
-                .password(userDto.getPassword())
                 .build();
         repository.save(user);
         log.info("User added: {}", user.getUsername());
-    }
-
-    public UserDto findByEmail(String email) {
-
-        if (!repository.existsByEmail(email)) {
-            return null;
-        }
-
-        var user = repository.findByEmail(email);
-
-        return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .build();
     }
 
     public UserDto findByUsername(String username) {
@@ -48,9 +31,22 @@ public class UserService {
 
         return UserDto.builder()
                 .id(user.getId())
+                .telegramId(user.getTelegramId())
                 .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
+                .build();
+    }
+
+    public UserDto findByTelegramId(String telegramId) {
+        if (!repository.existsByTelegramId(telegramId)) {
+            return null;
+        }
+
+        var user = repository.findByTelegramId(telegramId);
+
+        return UserDto.builder()
+                .id(user.getId())
+                .telegramId(user.getTelegramId())
+                .username(user.getUsername())
                 .build();
     }
 
@@ -63,9 +59,8 @@ public class UserService {
 
         return UserDto.builder()
                 .id(user.getId())
+                .telegramId(user.getTelegramId())
                 .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
                 .build();
     }
 }

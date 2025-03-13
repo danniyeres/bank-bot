@@ -10,8 +10,7 @@ import lombok.*;
 public class UserDto {
 
     private Long id;
+    private String telegramId;
     private String username;
-    private String password;
-    private String email;
 
 }

@@ -67,18 +67,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getByEmail")
-    public ResponseEntity<?> findByEmail(@RequestParam String email) {
-        try {
-            UserDto userDto = userService.findByEmail(email);
-            return ResponseEntity.ok(userDto);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error server: " + e.getMessage());
-        }
-    }
-
     @GetMapping("/getByUsername")
     public ResponseEntity<?> findByUsername(@RequestParam String username) {
         try {
@@ -95,6 +83,18 @@ public class UserController {
     public ResponseEntity<?> findById(@RequestParam Long id) {
         try {
             UserDto userDto = userService.findById(id);
+            return ResponseEntity.ok(userDto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error server: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/getByTelegramId")
+    public ResponseEntity<?> findByTelegramId(@RequestParam String telegramId) {
+        try {
+            UserDto userDto = userService.findByTelegramId(telegramId);
             return ResponseEntity.ok(userDto);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
